@@ -1,23 +1,23 @@
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { coinFlipGamePaths } from './apiConfig'
 
 const useStartGameQuery = () => {
   const keyQuery = `startGame${new Date()}`
-  return useMutation<number>(keyQuery, () =>
+  return useQuery<string>(keyQuery, () =>
     fetch(coinFlipGamePaths.startPath, { method: 'PATCH' }).then((res) => res.json()),
   )
 }
 
 const useLuckyWheelQuery = (gameId: string) => {
   const keyQuery = `wheel${gameId}`
-  return useQuery<string>(keyQuery, () =>
+  return useQuery<number>(keyQuery, () =>
     fetch(coinFlipGamePaths.luckyWheelPath).then((res) => res.json()),
   )
 }
 
 const useFinishGameQuery = (gameId: string) => {
   const keyQuery = `finishGame${gameId}`
-  return useMutation<boolean>(keyQuery, () =>
+  return useQuery<boolean>(keyQuery, () =>
     fetch(coinFlipGamePaths.finishPath, { method: 'PATCH' }).then((res) => res.json()),
   )
 }

@@ -36,15 +36,8 @@
     }
   },
   "rules": {
-    "no-unused-vars": [
-      "error",
-      {
-        "varsIgnorePattern": "_.+",
-        "argsIgnorePattern": "_.+",
-        "ignoreRestSiblings": true,
-        "args": "none"
-      }
-    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     "react/prop-types": "off",
     "import/named": "off"
   }
