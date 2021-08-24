@@ -29,6 +29,7 @@ export class CoinFlipController {
       betSize: value,
       multiplier: 0,
     });
+    return GAME_ID;
   }
 
   @Get('game/wheel')
