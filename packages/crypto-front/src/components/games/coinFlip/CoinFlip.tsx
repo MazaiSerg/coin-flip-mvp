@@ -7,7 +7,11 @@ import { FinishGame } from './gameStage/FinishGame'
 import { RestartGame } from './gameStage/RestartGame'
 import { LoadingError } from '../../layers/LoadingError'
 
-export const CoinFlip = () => {
+type CoinFlipProps = {
+  refetchAccountData: () => void
+}
+
+export const CoinFlip = ({ refetchAccountData }: CoinFlipProps) => {
   const [gameStage, setGameStage] = useState(GameStage.START)
   const [gameId, setGameId] = useState<string>()
   const [multiplier, setMultiplier] = useState<number>()
@@ -23,9 +27,10 @@ export const CoinFlip = () => {
         setGameId(undefined)
         setMultiplier(undefined)
         setIsWinner(undefined)
+        refetchAccountData()
       }
     },
-    [gameStage],
+    [gameStage, refetchAccountData],
   )
 
   const getGameStage = () => {

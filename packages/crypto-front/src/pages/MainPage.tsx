@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useBankrollQuery } from '../api/useBankrollQuery'
 import { CoinFlip } from '../components/games/coinFlip/CoinFlip'
 import { Loader } from '../components/layers/Loader'
 import { LoadingError } from '../components/layers/LoadingError'
+import { BankrollResponse } from '@coin-flip-mvp/crypto-fun/dist/dto/BankrollResponse'
 
 export const MainPage = () => {
-  const bankrollQuery = useBankrollQuery()
-  const { data: account, isLoading, isError } = bankrollQuery
+  const [account, setAccount] = useState<BankrollResponse>()
+  const { data, isLoading, isError, refetch } = useBankrollQuery()
+
+  useEffect(
+    function setAccountByData() {
+      setAccount(data)
+    },
+    [data],
+  )
+
+  const refetchAccountData = useCallback(async () => {
+    const { data, isError } = await refetch()
+    if (isError) {
+      return
+    }
+    setAccount(data)
+  }, [refetch])
+
   if (isLoading) {
     return <Loader />
   }
@@ -23,7 +40,7 @@ export const MainPage = () => {
         <span>{`balance: ${account.money}`}</span>
       </div>
       <div>
-        <CoinFlip />
+        <CoinFlip refetchAccountData={refetchAccountData} />
       </div>
     </>
   )

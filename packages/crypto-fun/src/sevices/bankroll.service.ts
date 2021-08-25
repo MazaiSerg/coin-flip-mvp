@@ -34,6 +34,6 @@ export class BankrollService {
 
   @Patch()
   payMoney(value: number) {
-    this.bankrolls[0].money -= value;
+    this.bankrolls[0].money += value;
   }
 }
