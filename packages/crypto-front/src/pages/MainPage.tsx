@@ -40,7 +40,7 @@ export const MainPage = () => {
         <span>{`balance: ${account.money}`}</span>
       </div>
       <div>
-        <CoinFlip refetchAccountData={refetchAccountData} />
+        <CoinFlip refetchAccountData={refetchAccountData} login={account.name} />
       </div>
     </>
   )

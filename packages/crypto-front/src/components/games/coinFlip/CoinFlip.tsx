@@ -9,10 +9,12 @@ import { LoadingError } from '../../layers/LoadingError'
 
 type CoinFlipProps = {
   refetchAccountData: () => void
+  login: string
 }
 
-export const CoinFlip = ({ refetchAccountData }: CoinFlipProps) => {
+export const CoinFlip = ({ refetchAccountData, login }: CoinFlipProps) => {
   const [gameStage, setGameStage] = useState(GameStage.START)
+  const [bet] = useState(1)
   const [gameId, setGameId] = useState<string>()
   const [multiplier, setMultiplier] = useState<number>()
   const [isWinner, setIsWinner] = useState<boolean>()
@@ -33,12 +35,17 @@ export const CoinFlip = ({ refetchAccountData }: CoinFlipProps) => {
     [gameStage, refetchAccountData],
   )
 
+  let queryBody
   const getGameStage = () => {
     switch (gameStage) {
       case GameStage.START:
         return <StartGame startGame={startGame} />
       case GameStage.WHEEL:
-        return <SpinWheel spinWheel={spinWheel} setGameId={setGameId} />
+        queryBody = {
+          login,
+          bet,
+        }
+        return <SpinWheel spinWheel={spinWheel} setGameId={setGameId} queryBody={queryBody} />
       case GameStage.FINISH:
         if (!gameId) {
           return <LoadingError />

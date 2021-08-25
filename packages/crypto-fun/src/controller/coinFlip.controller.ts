@@ -1,8 +1,9 @@
-import { Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch } from '@nestjs/common';
 import { BankrollService } from '../sevices/bankroll.service';
-import { BankrollResponse } from '../dto/BankrollResponse';
+import { BankrollResponse } from '../dto/responses/BankrollResponse';
 import { RandomizerService } from '../sevices/randomizer.service';
 import { CoinFlipService } from '../sevices/coinFlip.service';
+import { StartGameDto } from '../dto/requestes/startGameDto';
 
 const GAME_ID = '1';
 
@@ -20,13 +21,12 @@ export class CoinFlipController {
   }
 
   @Patch('game/start')
-  startGame() {
-    const value = 1;
-    this.bankrollService.getMoney(value);
+  startGame(@Body() { login, bet }: StartGameDto) {
+    this.bankrollService.getMoney(login, bet);
     this.coinFlipService.create({
-      playersId: '1',
+      login: login,
       gameId: GAME_ID,
-      betSize: value,
+      betSize: bet,
       multiplier: 0,
     });
     return GAME_ID;
@@ -41,10 +41,12 @@ export class CoinFlipController {
 
   @Patch('game/finish')
   finishGame() {
-    const { multiplier } = this.coinFlipService.getGameById(GAME_ID);
+    const { multiplier, betSize, login } =
+      this.coinFlipService.getGameById(GAME_ID);
+    const payment = multiplier * betSize;
     const isWinner = this.randomizerService.getCoinFlipResult();
     if (isWinner) {
-      this.bankrollService.payMoney(multiplier);
+      this.bankrollService.payMoney(login, payment);
     }
     this.coinFlipService.delete(GAME_ID);
   }
