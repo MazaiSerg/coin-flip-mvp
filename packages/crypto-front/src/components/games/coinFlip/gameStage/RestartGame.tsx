@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCoinFlipGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { useFinishGameQuery } from '../../../../api/useCoinFlipGameQuery'
 
 type RestartGameProps = {
   restartGame: () => void
@@ -8,7 +8,6 @@ type RestartGameProps = {
 }
 
 export const RestartGame = ({ restartGame, gameId, setIsWinner }: RestartGameProps) => {
-  const { useFinishGameQuery } = useCoinFlipGameQuery
   const { data, isError, isLoading } = useFinishGameQuery(gameId)
   if (isLoading) {
     return <span>isLoading</span>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCoinFlipGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { useLuckyWheelQuery } from '../../../../api/useCoinFlipGameQuery'
 
 type FinishGameProps = {
   finishGame: () => void
@@ -8,7 +8,6 @@ type FinishGameProps = {
 }
 
 export const FinishGame = ({ finishGame, setMultiplier, gameId }: FinishGameProps) => {
-  const { useLuckyWheelQuery } = useCoinFlipGameQuery
   const { data, isError, isLoading } = useLuckyWheelQuery(gameId)
   if (isLoading) {
     return <span>isLoading</span>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCoinFlipGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { useStartGameQuery } from '../../../../api/useCoinFlipGameQuery'
 
 type StartGameProps = {
   spinWheel: () => void
@@ -7,7 +7,6 @@ type StartGameProps = {
 }
 
 export const SpinWheel = ({ spinWheel, setGameId }: StartGameProps) => {
-  const { useStartGameQuery } = useCoinFlipGameQuery
   const { data, isError, isLoading } = useStartGameQuery()
   if (isLoading) {
     return <span>isLoading</span>
