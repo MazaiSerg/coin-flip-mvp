@@ -1,5 +1,7 @@
 import React from 'react'
 import { useStartGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { Loader } from '../../../layers/Loader'
+import { LoadingError } from '../../../layers/LoadingError'
 
 type StartGameProps = {
   spinWheel: () => void
@@ -9,10 +11,11 @@ type StartGameProps = {
 export const SpinWheel = ({ spinWheel, setGameId }: StartGameProps) => {
   const { data, isError, isLoading } = useStartGameQuery()
   if (isLoading) {
-    return <span>isLoading</span>
+    return <Loader />
   }
+
   if (isError || !data) {
-    return <span>error</span>
+    return <LoadingError />
   }
   setGameId(data)
 

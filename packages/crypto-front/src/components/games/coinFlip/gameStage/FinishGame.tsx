@@ -1,5 +1,7 @@
 import React from 'react'
 import { useLuckyWheelQuery } from '../../../../api/useCoinFlipGameQuery'
+import { Loader } from '../../../layers/Loader'
+import { LoadingError } from '../../../layers/LoadingError'
 
 type FinishGameProps = {
   finishGame: () => void
@@ -10,11 +12,11 @@ type FinishGameProps = {
 export const FinishGame = ({ finishGame, setMultiplier, gameId }: FinishGameProps) => {
   const { data, isError, isLoading } = useLuckyWheelQuery(gameId)
   if (isLoading) {
-    return <span>isLoading</span>
+    return <Loader />
   }
 
   if (isError || !data) {
-    return <span>error</span>
+    return <LoadingError />
   }
   setMultiplier(data)
   const handleClick = () => {

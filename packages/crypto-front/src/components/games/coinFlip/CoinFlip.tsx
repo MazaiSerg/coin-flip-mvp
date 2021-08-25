@@ -5,6 +5,7 @@ import { GameInfo } from './GameInfo'
 import { SpinWheel } from './gameStage/SpinWheel'
 import { FinishGame } from './gameStage/FinishGame'
 import { RestartGame } from './gameStage/RestartGame'
+import { LoadingError } from '../../layers/LoadingError'
 
 export const CoinFlip = () => {
   const [gameStage, setGameStage] = useState(GameStage.START)
@@ -35,12 +36,12 @@ export const CoinFlip = () => {
         return <SpinWheel spinWheel={spinWheel} setGameId={setGameId} />
       case GameStage.FINISH:
         if (!gameId) {
-          return <span>error</span>
+          return <LoadingError />
         }
         return <FinishGame finishGame={finishGame} setMultiplier={setMultiplier} gameId={gameId} />
       case GameStage.RESULT:
         if (!gameId) {
-          return <span>error</span>
+          return <LoadingError />
         }
         return <RestartGame setIsWinner={setIsWinner} gameId={gameId} restartGame={restartGame} />
     }
