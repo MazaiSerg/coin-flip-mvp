@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
-import { BankrollResponse } from './dto/BankrollResponse'
 import { bankrollPath } from './apiConfig'
+import { BankrollResponse } from '@coin-flip-mvp/crypto-dto/responses/BankrollResponse'
 
 export const useBankrollQuery = () => {
   const keyQuery = `bankroll${new Date()}`

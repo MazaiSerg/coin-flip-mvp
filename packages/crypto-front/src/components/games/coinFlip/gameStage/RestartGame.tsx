@@ -1,5 +1,7 @@
 import React from 'react'
 import { useFinishGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { Loader } from '../../../layers/Loader'
+import { LoadingError } from '../../../layers/LoadingError'
 
 type RestartGameProps = {
   restartGame: () => void
@@ -10,11 +12,11 @@ type RestartGameProps = {
 export const RestartGame = ({ restartGame, gameId, setIsWinner }: RestartGameProps) => {
   const { data, isError, isLoading } = useFinishGameQuery(gameId)
   if (isLoading) {
-    return <span>isLoading</span>
+    return <Loader />
   }
 
   if (isError || !data) {
-    return <span>error</span>
+    return <LoadingError />
   }
   setIsWinner(data)
   return (

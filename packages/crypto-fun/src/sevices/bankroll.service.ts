@@ -21,19 +21,36 @@ export class BankrollService {
   get() {
     return this.bankrolls.map((bankroll) => {
       return {
-        name: bankroll.login,
+        login: bankroll.login,
         money: bankroll.money,
       };
     })[0];
   }
 
-  @Patch()
-  getMoney(value: number) {
-    this.bankrolls[0].money -= value;
+  @Get()
+  getByLogin(login: string) {
+    return this.bankrolls.find((bankroll) => login === bankroll.login);
   }
 
   @Patch()
-  payMoney(value: number) {
-    this.bankrolls[0].money -= value;
+  getMoney(login: string, value: number) {
+    const index = this.getIndexByLogin(login);
+    if (index < 0) {
+      return;
+    }
+    this.bankrolls[index].money -= value;
+  }
+
+  @Patch()
+  payMoney(login: string, value: number) {
+    const index = this.getIndexByLogin(login);
+    if (index < 0) {
+      return;
+    }
+    this.bankrolls[index].money += value;
+  }
+
+  getIndexByLogin(login: string) {
+    return this.bankrolls.findIndex((bankroll) => login === bankroll.login);
   }
 }

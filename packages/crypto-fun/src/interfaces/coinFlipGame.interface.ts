@@ -1,5 +1,5 @@
 export interface CoinFlipGame {
-  playersId: string;
+  login: string;
   gameId: string;
   betSize: number;
   multiplier: number;

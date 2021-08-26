@@ -1,18 +1,23 @@
 import React from 'react'
 import { useStartGameQuery } from '../../../../api/useCoinFlipGameQuery'
+import { Loader } from '../../../layers/Loader'
+import { LoadingError } from '../../../layers/LoadingError'
+import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto'
 
 type StartGameProps = {
+  queryBody: StartGameDto
   spinWheel: () => void
   setGameId: (data: string) => void
 }
 
-export const SpinWheel = ({ spinWheel, setGameId }: StartGameProps) => {
-  const { data, isError, isLoading } = useStartGameQuery()
+export const SpinWheel = ({ queryBody, spinWheel, setGameId }: StartGameProps) => {
+  const { data, isError, isLoading } = useStartGameQuery(queryBody)
   if (isLoading) {
-    return <span>isLoading</span>
+    return <Loader />
   }
+
   if (isError || !data) {
-    return <span>error</span>
+    return <LoadingError />
   }
   setGameId(data)
 

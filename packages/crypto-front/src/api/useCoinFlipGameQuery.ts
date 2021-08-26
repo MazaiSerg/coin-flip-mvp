@@ -1,10 +1,15 @@
 import { useQuery } from 'react-query'
 import { coinFlipGamePaths } from './apiConfig'
+import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto'
 
-export const useStartGameQuery = () => {
+export const useStartGameQuery = (requestBody: StartGameDto) => {
   const keyQuery = `startGame${new Date()}`
+  const options = {
+    method: 'PATCH',
+    body: JSON.stringify(requestBody),
+  }
   return useQuery<string>(keyQuery, () =>
-    fetch(coinFlipGamePaths.startPath, { method: 'PATCH' }).then((res) => res.json()),
+    fetch(coinFlipGamePaths.startPath, options).then((res) => res.json()),
   )
 }
 
