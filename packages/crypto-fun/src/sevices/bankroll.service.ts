@@ -21,7 +21,7 @@ export class BankrollService {
   get() {
     return this.bankrolls.map((bankroll) => {
       return {
-        name: bankroll.login,
+        login: bankroll.login,
         money: bankroll.money,
       };
     })[0];

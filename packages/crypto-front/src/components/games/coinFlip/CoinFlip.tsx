@@ -8,11 +8,11 @@ import { RestartGame } from './gameStage/RestartGame'
 import { LoadingError } from '../../layers/LoadingError'
 
 type CoinFlipProps = {
-  refetchAccountData: () => void
+  onGameStart: () => void
   login: string
 }
 
-export const CoinFlip = ({ refetchAccountData, login }: CoinFlipProps) => {
+export const CoinFlip = ({ onGameStart, login }: CoinFlipProps) => {
   const [gameStage, setGameStage] = useState(GameStage.START)
   const [bet] = useState(1)
   const [gameId, setGameId] = useState<string>()
@@ -29,10 +29,10 @@ export const CoinFlip = ({ refetchAccountData, login }: CoinFlipProps) => {
         setGameId(undefined)
         setMultiplier(undefined)
         setIsWinner(undefined)
-        refetchAccountData()
+        onGameStart()
       }
     },
-    [gameStage, refetchAccountData],
+    [gameStage, onGameStart],
   )
 
   let queryBody

@@ -2,7 +2,7 @@ import React from 'react'
 import { useStartGameQuery } from '../../../../api/useCoinFlipGameQuery'
 import { Loader } from '../../../layers/Loader'
 import { LoadingError } from '../../../layers/LoadingError'
-import { StartGameDto } from '@coin-flip-mvp/crypto-fun/dist/dto/requestes/startGameDto'
+import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto'
 
 type StartGameProps = {
   queryBody: StartGameDto

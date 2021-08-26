@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Patch } from '@nestjs/common';
 import { BankrollService } from '../sevices/bankroll.service';
-import { BankrollResponse } from '../dto/responses/BankrollResponse';
 import { RandomizerService } from '../sevices/randomizer.service';
 import { CoinFlipService } from '../sevices/coinFlip.service';
-import { StartGameDto } from '../dto/requestes/startGameDto';
+import { BankrollResponse } from '@coin-flip-mvp/crypto-dto/responses/BankrollResponse';
+import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto';
 
 const GAME_ID = '1';
 

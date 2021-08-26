@@ -1,4 +1,4 @@
-export class StartGameDto {
+export type StartGameDto = {
   login: string;
   bet: number;
 }

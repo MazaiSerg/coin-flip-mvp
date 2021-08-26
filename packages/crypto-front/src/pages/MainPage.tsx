@@ -3,7 +3,7 @@ import { useBankrollQuery } from '../api/useBankrollQuery'
 import { CoinFlip } from '../components/games/coinFlip/CoinFlip'
 import { Loader } from '../components/layers/Loader'
 import { LoadingError } from '../components/layers/LoadingError'
-import { BankrollResponse } from '@coin-flip-mvp/crypto-fun/dist/dto/BankrollResponse'
+import { BankrollResponse } from '@coin-flip-mvp/crypto-dto/responses/BankrollResponse'
 
 export const MainPage = () => {
   const [account, setAccount] = useState<BankrollResponse>()
@@ -16,13 +16,16 @@ export const MainPage = () => {
     [data],
   )
 
-  const refetchAccountData = useCallback(async () => {
-    const { data, isError } = await refetch()
-    if (isError) {
-      return
-    }
-    setAccount(data)
-  }, [refetch])
+  const handleGameStart = useCallback(
+    async function refetchAccountData() {
+      const { data, isError } = await refetch()
+      if (isError) {
+        return
+      }
+      setAccount(data)
+    },
+    [refetch],
+  )
 
   if (isLoading) {
     return <Loader />
@@ -34,13 +37,13 @@ export const MainPage = () => {
   return (
     <>
       <div>
-        <span>{`Name: ${account.name}`}</span>
+        <span>{`Name: ${account.login}`}</span>
       </div>
       <div>
         <span>{`balance: ${account.money}`}</span>
       </div>
       <div>
-        <CoinFlip refetchAccountData={refetchAccountData} login={account.name} />
+        <CoinFlip onGameStart={handleGameStart} login={account.login} />
       </div>
     </>
   )
