@@ -1,11 +1,13 @@
-import { Body, Controller, Get, Patch, Post, Redirect } from '@nestjs/common';
+import { Body, Controller, Get, Patch } from '@nestjs/common';
 import { BankrollService } from '../sevices/bankroll.service';
 import { RandomizerService } from '../sevices/randomizer.service';
 import { CoinFlipService } from '../sevices/coinFlip.service';
-import { BankrollResponse } from '@coin-flip-mvp/crypto-dto/responses/BankrollResponse';
-import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto';
+import {
+  BankrollResponse,
+  StartGameDto,
+  GameHistoryGameParamsDto,
+} from '@coin-flip-mvp/crypto-dto';
 import { CoinFlipGameHistory } from '../interfaces/coinFlipGameHistory.interface';
-import { GameHistoryGameParamsDto } from '../../../crypto-dto/requestes/GameHistoryGameParamsDto';
 import { CoinFlipGameHistoryService } from '../sevices/coinFlipGameHistory.service';
 
 const GAME_ID = '1';

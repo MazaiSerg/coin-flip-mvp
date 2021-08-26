@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import { coinFlipGamePaths } from './apiConfig'
-import { StartGameDto } from '@coin-flip-mvp/crypto-dto/requestes/StartGameDto'
+import { StartGameDto } from '@coin-flip-mvp/crypto-dto'
 
 export const useStartGameQuery = (requestBody: StartGameDto) => {
   const keyQuery = `startGame${new Date()}`
