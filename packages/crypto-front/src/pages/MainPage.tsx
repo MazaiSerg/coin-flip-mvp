@@ -4,10 +4,16 @@ import { CoinFlip } from '../components/games/coinFlip/CoinFlip'
 import { Loader } from '../components/layers/Loader'
 import { LoadingError } from '../components/layers/LoadingError'
 import { BankrollResponse } from '@coin-flip-mvp/crypto-dto/responses/BankrollResponse'
+import { useGameHistoryQuery } from '../api/useGameHistoryQuery'
 
 export const MainPage = () => {
   const [account, setAccount] = useState<BankrollResponse>()
   const { data, isLoading, isError, refetch } = useBankrollQuery()
+  const { data: history, refetch: refetchHistory } = useGameHistoryQuery()
+
+  useEffect(() => {
+    console.log(history)
+  }, [history])
 
   useEffect(
     function setAccountByData() {
@@ -23,8 +29,9 @@ export const MainPage = () => {
         return
       }
       setAccount(data)
+      refetchHistory()
     },
-    [refetch],
+    [refetch, refetchHistory],
   )
 
   if (isLoading) {
