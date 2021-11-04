@@ -6,3 +6,4 @@ export const coinFlipGamePaths = {
   luckyWheelPath: `${basePath}/game/wheel`,
   finishPath: `${basePath}/game/finish`,
 }
+export const coinFlipHistoryPath = `${basePath}/history`
